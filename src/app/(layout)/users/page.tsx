@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import NotFoundPage from "@/components/404";
 import { getUsers } from "../../../../server/users";
 import { columns } from "./columns";
