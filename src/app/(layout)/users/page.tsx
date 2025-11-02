@@ -2,8 +2,8 @@ export const dynamic = "force-dynamic";
 
 import NotFoundPage from "@/components/404";
 import { getUsers } from "../../../../server/users";
-import { columns } from "./columns";
-import { DataTable } from "./data-table";
+import { columns } from "./partials/columns";
+import { DataTable } from "./partials/data-table";
 
 export default async function DemoPage() {
   const data = await getUsers();

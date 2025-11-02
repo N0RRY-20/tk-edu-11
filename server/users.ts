@@ -1,3 +1,4 @@
+"use server";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
@@ -16,5 +17,41 @@ export async function getUsers() {
     return response.users;
   } catch (error) {
     console.error("Error fetching users:", error);
+  }
+}
+
+export async function createUser({
+  email,
+  password,
+  name,
+  role,
+}: {
+  email: string;
+  password: string;
+  name: string;
+  role: ("admin" | "guru" | "walimurid")[];
+}) {
+  try {
+    const response = await auth.api.createUser({
+      body: {
+        email,
+        password,
+        name,
+        role,
+      },
+    });
+    if (response) {
+      return {
+        success: true,
+        message: "User created successfully",
+      };
+    }
+  } catch (error) {
+    const err = error as { message: string };
+    console.error("Error creating user:", err.message);
+    return {
+      success: false,
+      message: err.message,
+    };
   }
 }
